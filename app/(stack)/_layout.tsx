@@ -2,6 +2,6 @@ import {Stack} from "expo-router";
 
 export default function PageLayout() {
     return (
-        <Stack></Stack>
+        <Stack screenOptions={{ headerShown: false }}></Stack>
     )
 }
