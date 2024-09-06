@@ -12,7 +12,7 @@ const dayInWeek = 7
 const {width} = Dimensions.get('window')
 
 export default function DayItem(props: DayItemProps) {
-    const dayNumber = props.date.getDay()
+    const dayNumber = props.date.getDate()
     const weekDay = () => {
         let days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
         return days[props.date.getDay()]
