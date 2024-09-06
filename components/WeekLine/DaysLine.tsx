@@ -13,7 +13,7 @@ type Day = {
 
 export default function DaysLine(props: DaysLineProps) {
     return (
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{maxHeight: 50}}>
             {props.days.map((day: Day, index: number) => (
                 <DayItem
                     date={day.date}

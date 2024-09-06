@@ -1,9 +1,10 @@
-import {View, StyleSheet, Text} from "react-native";
+import {View, StyleSheet, FlatList, SafeAreaView} from "react-native";
 import DaysLine from "@/components/WeekLine/DaysLine";
 import {useState} from "react";
+import ScheduleCard from "@/components/ScheduleCard";
 
 const daysMock = [
-    { date: new Date('2024-08-11') },
+    { date: new Date('2024-08-09') },
     { date: new Date('2024-08-12')},
     { date: new Date('2024-08-19') },
     { date: new Date('2024-08-13') },
@@ -22,7 +23,15 @@ export default function ScheduleScreen() {
                 selectedDay={selectedDay}
                 onPressDay={setSelectedDay}
             />
-            <Text>testing</Text>
+            <SafeAreaView style={styles.cardList}>
+                <FlatList
+                    data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,  10, 11, 12, 13, 14, 15, 16]}
+                    renderItem={({}) => (
+                        <ScheduleCard />
+                    )}
+                    ItemSeparatorComponent={() => <View style={{ height: 15 }} ></View>}
+                />
+            </SafeAreaView>
         </View>
     );
 }
@@ -30,5 +39,10 @@ export default function ScheduleScreen() {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 10,
+        flex: 1,
+    },
+    cardList: {
+        marginTop: 15,
+        flex: 1,
     },
 })
