@@ -2,6 +2,9 @@ import {View, StyleSheet, FlatList, SafeAreaView} from "react-native";
 import DaysLine from "@/components/WeekLine/DaysLine";
 import {useState} from "react";
 import ScheduleCard from "@/components/ScheduleCard";
+import {ActivityIndicator} from "react-native-paper";
+import { useQuery } from "@tanstack/react-query"
+import ScheduleCardList from "@/components/ScheduleCardList";
 
 const daysMock = [
     { date: new Date('2024-08-09') },
@@ -15,7 +18,8 @@ const daysMock = [
 ]
 
 export default function ScheduleScreen() {
-    const [selectedDay, setSelectedDay] = useState(new Date('2024-08-19'))
+    const [selectedDay, setSelectedDay] = useState<Date>(new Date('2024-08-19'))
+
     return (
         <View style={styles.container}>
             <DaysLine
@@ -23,15 +27,7 @@ export default function ScheduleScreen() {
                 selectedDay={selectedDay}
                 onPressDay={setSelectedDay}
             />
-            <SafeAreaView style={styles.cardList}>
-                <FlatList
-                    data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,  10, 11, 12, 13, 14, 15, 16]}
-                    renderItem={({}) => (
-                        <ScheduleCard />
-                    )}
-                    ItemSeparatorComponent={() => <View style={{ height: 15 }} ></View>}
-                />
-            </SafeAreaView>
+            <ScheduleCardList date={selectedDay} />
         </View>
     );
 }
@@ -39,10 +35,6 @@ export default function ScheduleScreen() {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 10,
-        flex: 1,
-    },
-    cardList: {
-        marginTop: 15,
         flex: 1,
     },
 })
