@@ -3,13 +3,14 @@ import {FlatList, SafeAreaView, StyleSheet, View} from "react-native";
 import ScheduleCard from "@/components/ScheduleCard";
 import {ActivityIndicator} from "react-native-paper";
 import api from '@/api/index'
+import ScheduleListItemInterface from "@/api/types/ScheduleListItemInterface";
 
 type ScheduleCardListProps = {
     date: Date,
 }
 
 export default function ScheduleCardList(props: ScheduleCardListProps) {
-    const { isPending, error, data } = useQuery({
+    const { isPending, error, data }: { isPending: boolean, error: boolean, data: ScheduleListItemInterface[] } = useQuery({
         queryKey: ['scheduleList', props.date.getTime().toString()],
         queryFn: () => api.getScheduleList(props.date.getTime().toString()),
     })
@@ -24,8 +25,8 @@ export default function ScheduleCardList(props: ScheduleCardListProps) {
         <SafeAreaView style={styles.container}>
             <FlatList
                 data={data}
-                renderItem={({}) => (
-                    <ScheduleCard />
+                renderItem={({item}) => (
+                    <ScheduleCard {...item} />
                 )}
                 ItemSeparatorComponent={() => <View style={{ height: 15 }} ></View>}
             />

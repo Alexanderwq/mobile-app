@@ -1,8 +1,10 @@
+import ScheduleListItemInterface from "@/api/types/ScheduleListItemInterface";
+
 export default {
-    getScheduleList(time: string): Promise<void> {
+    getScheduleList(time: string): Promise<ScheduleListItemInterface[]> {
         const mockList = [
             {
-                startTime: new Date('2024-08-21 14:00').getTime(),
+                startTime: '14:00',
                 endTime: new Date('2024-08-21 15:00').getTime(),
                 trainerName: 'Маркова Алина',
                 sportName: 'Йога',
@@ -28,7 +30,7 @@ export default {
         ]
         return new Promise((res) => {
             console.log(time)
-            setTimeout(() => res({data: mockList}), 3000)
+            setTimeout(() => res(mockList), 3000)
         })
     },
 }

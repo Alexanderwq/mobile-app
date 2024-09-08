@@ -1,9 +1,6 @@
-import {View, StyleSheet, FlatList, SafeAreaView} from "react-native";
+import {View, StyleSheet} from "react-native";
 import DaysLine from "@/components/WeekLine/DaysLine";
 import {useState} from "react";
-import ScheduleCard from "@/components/ScheduleCard";
-import {ActivityIndicator} from "react-native-paper";
-import { useQuery } from "@tanstack/react-query"
 import ScheduleCardList from "@/components/ScheduleCardList";
 
 const daysMock = [

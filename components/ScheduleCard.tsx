@@ -1,24 +1,31 @@
 import {StyleSheet, View} from "react-native";
 import {Text} from "react-native-paper";
 
-export default function ScheduleCard() {
+type ScheduleCardProps = {
+  startTime: string,
+  endTime: string,
+  trainerName: string,
+  sportName: string,
+}
+
+export default function ScheduleCard(props: ScheduleCardProps) {
     return (
         <View style={styles.card}>
             <View>
                 <Text>
-                    18:00
+                  { props.startTime }
                 </Text>
                 <Text>
-                    19:00
+                  { props.endTime }
                 </Text>
             </View>
             <View style={styles.line}></View>
             <View>
                 <Text>
-                    Маркова Анастасия Владимировна
+                  { props.trainerName }
                 </Text>
                 <Text>
-                    Йога
+                  { props.sportName }
                 </Text>
             </View>
         </View>
