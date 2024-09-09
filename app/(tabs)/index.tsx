@@ -21,7 +21,7 @@ export default function HomeScreen() {
     {
       title: 'Наша команда',
       icon: 'folder',
-      href: "/"
+      href: "/team"
     }]
 
     return (
