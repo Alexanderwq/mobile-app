@@ -10,17 +10,17 @@ export default function HomeScreen() {
     },
     {
       title: 'Приобрести абонемент',
-      icon: 'folder',
+      icon: 'wallet',
       href: "/"
     },
     {
       title: 'Мы на карте',
-      icon: 'folder',
+      icon: 'map',
       href: "/"
     },
     {
       title: 'Наша команда',
-      icon: 'folder',
+      icon: 'nature-people',
       href: "/team"
     }]
 
