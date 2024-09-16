@@ -11,7 +11,7 @@ export default function HomeScreen() {
     {
       title: 'Приобрести абонемент',
       icon: 'wallet',
-      href: "/"
+      href: "/purchases"
     },
     {
       title: 'Мы на карте',

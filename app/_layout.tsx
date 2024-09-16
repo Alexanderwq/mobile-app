@@ -32,7 +32,7 @@ export default function RootLayout() {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: 'tomato',
+      primary: '#01a5dd',
       secondary: 'yellow',
     },
   };
