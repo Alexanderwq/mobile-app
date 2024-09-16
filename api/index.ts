@@ -5,32 +5,32 @@ export default {
         const mockList = [
             {
                 startTime: '14:00',
-                endTime: new Date('2024-08-21 15:00').getTime(),
+                endTime: '15:00',
                 trainerName: 'Маркова Алина',
                 sportName: 'Йога',
             },
             {
-                startTime: new Date('2024-08-21 14:00').getTime(),
-                endTime: new Date('2024-08-21 15:00').getTime(),
+                startTime: '15:00',
+                endTime: '16:30',
                 trainerName: 'Маркова Алина',
                 sportName: 'Йога',
             },
             {
-                startTime: new Date('2024-08-21 14:00').getTime(),
-                endTime: new Date('2024-08-21 15:00').getTime(),
+                startTime: '16:00',
+                endTime: '17:00',
                 trainerName: 'Маркова Алина',
                 sportName: 'Йога',
             },
             {
-                startTime: new Date('2024-08-21 14:00').getTime(),
-                endTime: new Date('2024-08-21 15:00').getTime(),
+                startTime: '18:30',
+                endTime: '19:30',
                 trainerName: 'Маркова Алина',
                 sportName: 'Йога',
             },
         ]
         return new Promise((res) => {
             console.log(time)
-            setTimeout(() => res(mockList), 3000)
+            setTimeout(() => res(mockList), 1000)
         })
     },
 }
