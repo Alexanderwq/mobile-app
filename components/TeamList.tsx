@@ -1,6 +1,7 @@
-import {FlatList, Image, StyleSheet, View} from "react-native";
+import {FlatList, Image, StyleSheet, TouchableOpacity, View} from "react-native";
 import {Divider, Text} from 'react-native-paper'
 import TrainerCardInterface from "@/types/TrainerCardInterface";
+import {router} from "expo-router";
 
 export default function TeamList() {
   const teamList: TrainerCardInterface[] = [
@@ -24,7 +25,7 @@ export default function TeamList() {
     trainer: require('@/assets/images/trainer.webp')
   }
   const renderItem = ({item}: { item: TrainerCardInterface }) => (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={() => router.push('/team/1')}>
       <Image
         source={imageNames[item.avatar]}
         style={styles.avatar}
@@ -34,7 +35,7 @@ export default function TeamList() {
         <Divider/>
         <Text>{item.jobTitle}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
   return (
     <FlatList

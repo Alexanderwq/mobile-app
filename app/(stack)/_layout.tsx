@@ -10,7 +10,7 @@ export default function PageLayout() {
             </TouchableOpacity>
           )}}>
           <Stack.Screen name="schedule" options={{ title: 'Расписание' }} />
-          <Stack.Screen name="team" options={{ title: 'Наша команда' }} />
+          <Stack.Screen name="team/index" options={{ title: 'Наша команда' }} />
         </Stack>
     )
 }
