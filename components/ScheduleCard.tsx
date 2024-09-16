@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'gray',
         transform: 'rotate(90deg)',
         position: 'absolute',
-        top: '50%',
+        top: '100%',
         left: 40,
         boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'
     },
