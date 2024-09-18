@@ -9,6 +9,7 @@ import {
 
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import {Stack} from "expo-router";
+import {AuthProvider} from "@/hooks/AuthProvider";
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient()
@@ -40,9 +41,11 @@ export default function RootLayout() {
   return (
     <PaperProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <Stack screenOptions={{ tabBarActiveTintColor: 'blue', headerShown: false }}>
-          <Stack.Screen name="(tabs)" />
-        </Stack>
+        <AuthProvider>
+          <Stack screenOptions={{ tabBarActiveTintColor: 'blue', headerShown: false }}>
+            <Stack.Screen name="(tabs)" />
+          </Stack>
+        </AuthProvider>
       </QueryClientProvider>
     </PaperProvider>
   );

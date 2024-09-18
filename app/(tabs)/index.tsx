@@ -24,7 +24,7 @@ export default function HomeScreen() {
       href: "/team"
     }]
 
-    return (
+  return (
         <View style={{marginTop: 50}}>
             <MainMenu links={links} />
         </View>
