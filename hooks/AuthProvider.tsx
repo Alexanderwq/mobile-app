@@ -7,10 +7,12 @@ import { login as loginRequest } from '@/api/auth'
 const AuthContext = createContext<{
   login: (email: string, password: string) => void,
   logOut: () => void,
+  signUp: () => void,
   token: string | null,
   user: UserInterface | null,
 }>({
   login: (email: string, password: string) => null,
+  signUp: () => null,
   logOut: () => null,
   token: null,
   user: null,
@@ -31,12 +33,16 @@ export function AuthProvider({ children }) {
     router.push('/')
   }
 
+  async function signUp() {
+
+  }
+
   function logOut() {
     setUser(null)
     setToken(null)
   }
 
-  return <AuthContext.Provider value={{ login, logOut, user, token }}>{ children }</AuthContext.Provider>
+  return <AuthContext.Provider value={{ login, signUp, logOut, user, token }}>{ children }</AuthContext.Provider>
 }
 
 export const useAuth = () => {
