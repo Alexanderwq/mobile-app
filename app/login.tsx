@@ -30,11 +30,11 @@ export default function loginPage() {
   }
 
   return (
-    <View style={{ paddingTop: 200 }}>
+    <View style={styles.container}>
       { showLoader ? (
         <ActivityIndicator size='large' />
       ) : (
-        <View style={styles.container}>
+        <View style={styles.form}>
           <Text variant="titleLarge">
             Вход
           </Text>
@@ -68,6 +68,10 @@ export default function loginPage() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: .75,
+    justifyContent: 'center',
+  },
+  form: {
     padding: 20,
     gap: 15,
   },
