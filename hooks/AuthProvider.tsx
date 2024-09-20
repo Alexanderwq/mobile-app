@@ -2,17 +2,18 @@ import {useContext, createContext, useState} from "react";
 import UserInterface from "@/types/auth/UserInterface";
 import {useStorageState} from "@/hooks/useStorageState";
 import {router} from "expo-router";
-import { login as loginRequest } from '@/api/auth'
+import { login as loginRequest, signUp as signUpRequest } from '@/api/auth'
+import {SignUpFormInterface} from "@/api/auth/types";
 
 const AuthContext = createContext<{
   login: (email: string, password: string) => void,
   logOut: () => void,
-  signUp: () => void,
+  signUp: (data: SignUpFormInterface) => void,
   token: string | null,
   user: UserInterface | null,
 }>({
   login: (email: string, password: string) => null,
-  signUp: () => null,
+  signUp: (data: SignUpFormInterface) => null,
   logOut: () => null,
   token: null,
   user: null,
@@ -33,8 +34,15 @@ export function AuthProvider({ children }) {
     router.push('/')
   }
 
-  async function signUp() {
-
+  async function signUp(data: SignUpFormInterface) {
+    const user = await signUpRequest(data)
+    setUser({
+      name: user.name,
+      lastName: user.surName,
+      email: user.email,
+    })
+    setToken(user.token)
+    router.push('/')
   }
 
   function logOut() {
