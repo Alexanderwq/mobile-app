@@ -2,20 +2,17 @@ import {StyleSheet, View} from "react-native";
 import {ActivityIndicator, Button, Text, TextInput} from "react-native-paper";
 import {useState} from "react";
 import {useAuth} from "@/hooks/AuthProvider";
+import {useEmailValidation} from "@/hooks/useEmailValidation";
+import {usePasswordValidation} from "@/hooks/usePasswordValidation";
 
 export default function loginPage() {
-  const emailRegExp = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/g
-  const minPasswordLength = 6
-
   const { login } = useAuth()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [showLoader, setShowLoader] = useState<boolean>(false)
 
-  const emailIsEmpty = email.length === 0
-  const passwordIsEmpty = password.length === 0
-  const emailError: boolean = !emailRegExp.test(email) && !emailIsEmpty
-  const passwordError: boolean = password.length < minPasswordLength && !passwordIsEmpty
+  const { emailError, emailIsEmpty } = useEmailValidation(email)
+  const { passwordError, passwordIsEmpty } = usePasswordValidation(password)
 
   const buttonDisabled: boolean = emailError || passwordError || passwordIsEmpty || emailIsEmpty
 
