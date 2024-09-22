@@ -4,6 +4,7 @@ import {useState} from "react";
 import {useAuth} from "@/hooks/AuthProvider";
 import {useEmailValidation} from "@/hooks/useEmailValidation";
 import {usePasswordValidation} from "@/hooks/usePasswordValidation";
+import {router} from "expo-router";
 
 export default function loginPage() {
   const { login } = useAuth()
@@ -56,6 +57,12 @@ export default function loginPage() {
             onPress={clickButton}
           >
             Войти
+          </Button>
+          <Button
+            mode="text"
+            onPress={() => router.push('/sign-up')}
+          >
+            Зарегистрироваться
           </Button>
         </View>
       )}

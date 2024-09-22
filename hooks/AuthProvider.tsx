@@ -28,7 +28,6 @@ export function AuthProvider({ children }) {
     setUser({
       name: user.name,
       email: user.email,
-      lastName: user.surName
     })
     setToken(user.token)
     router.push('/')
@@ -38,7 +37,6 @@ export function AuthProvider({ children }) {
     const user = await signUpRequest(data)
     setUser({
       name: user.name,
-      lastName: user.surName,
       email: user.email,
     })
     setToken(user.token)
