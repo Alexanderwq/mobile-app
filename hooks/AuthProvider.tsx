@@ -44,6 +44,7 @@ export function AuthProvider({ children }) {
     setUser({
       name: 'sanya',
       email: 'test@test.ru',
+      cityName: 'Ярославль',
     })
   }
 
