@@ -16,7 +16,7 @@ export default function HomeScreen() {
     {
       title: 'Мы на карте',
       icon: 'map',
-      href: "/"
+      href: "/modal"
     },
     {
       title: 'Наша команда',

@@ -1,6 +1,7 @@
 import {View, StyleSheet} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {useAuth} from "@/hooks/AuthProvider";
+import {router} from "expo-router";
 
 export default function ProfileScreen() {
     const { user } = useAuth()
@@ -17,7 +18,7 @@ export default function ProfileScreen() {
               <Text variant='titleMedium'>Имя:</Text>
               <Text variant='titleMedium'>{user?.name}</Text>
             </View>
-            <Button style={styles.changeCityButton}>
+            <Button style={styles.changeCityButton} onPress={() => router.push('/changePasswordModal')}>
               Смена пароля
             </Button>
           </View>
