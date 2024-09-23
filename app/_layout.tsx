@@ -44,7 +44,8 @@ export default function RootLayout() {
         <AuthProvider>
           <Stack screenOptions={{ tabBarActiveTintColor: 'blue', headerShown: false }}>
             <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="changePasswordModal" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="changeCityModal" options={{ presentation: 'modal' }} />
           </Stack>
         </AuthProvider>
       </QueryClientProvider>

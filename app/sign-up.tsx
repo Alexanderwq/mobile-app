@@ -8,11 +8,7 @@ import {useAuth} from "@/hooks/AuthProvider";
 import {useEmailValidation} from "@/hooks/useEmailValidation";
 import {usePasswordValidation} from "@/hooks/usePasswordValidation";
 import {router} from "expo-router";
-
-type CityInterface = {
-  id: number,
-  name: string,
-}
+import CityInterface from "@/types/city/CityInterface";
 
 const citiesList: CityInterface[]  = [
   {
