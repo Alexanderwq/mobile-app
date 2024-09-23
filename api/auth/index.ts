@@ -1,25 +1,13 @@
-import {SignUpFormInterface, UserResponse} from "@/api/auth/types";
+import {SignUpFormInterface} from "@/api/auth/types";
 
-export function login(email: string, password: string): Promise<UserResponse> {
-  const mockUser = {
-    token: 'asfxzs12',
-    email: 'test@test.ru',
-    name: 'sanya',
-    surName: 'tesSfa',
-  }
+export function login(email: string, password: string): Promise<string> {
   return new Promise((res) => {
-    setTimeout(() => res(mockUser), 1000)
+    setTimeout(() => res('asfxzs12'), 1000)
   })
 }
 
-export function signUp(data: SignUpFormInterface): Promise<UserResponse> {
-  const mockUser = {
-    token: 'asfxzs12',
-    email: 'test@test.ru',
-    name: 'sanya',
-    surName: 'tesSfa',
-  }
+export function signUp(data: SignUpFormInterface): Promise<string> {
   return new Promise((res) => {
-    setTimeout(() => res(mockUser), 1000)
+    setTimeout(() => res('asfxzs12'), 1000)
   })
 }

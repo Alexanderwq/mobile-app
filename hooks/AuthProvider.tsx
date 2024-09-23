@@ -1,4 +1,4 @@
-import {useContext, createContext, useState} from "react";
+import {useContext, createContext, useState, useEffect} from "react";
 import UserInterface from "@/types/auth/UserInterface";
 import {useStorageState} from "@/hooks/useStorageState";
 import {router} from "expo-router";
@@ -24,22 +24,14 @@ export function AuthProvider({ children }) {
   const [[isLoading, token], setToken] = useStorageState('token')
 
   async function login(email: string, password: string) {
-    const user = await loginRequest(email, password)
-    setUser({
-      name: user.name,
-      email: user.email,
-    })
-    setToken(user.token)
+    const token = await loginRequest(email, password)
+    setToken(token)
     router.push('/')
   }
 
   async function signUp(data: SignUpFormInterface) {
-    const user = await signUpRequest(data)
-    setUser({
-      name: user.name,
-      email: user.email,
-    })
-    setToken(user.token)
+    const token = await signUpRequest(data)
+    setToken(token)
     router.push('/')
   }
 
@@ -48,6 +40,18 @@ export function AuthProvider({ children }) {
     setToken(null)
   }
 
+  function getUser() {
+    setUser({
+      name: 'sanya',
+      email: 'test@test.ru',
+    })
+  }
+
+  useEffect(() => {
+    if (token) {
+      getUser()
+    }
+  }, [token])
   return <AuthContext.Provider value={{ login, signUp, logOut, user, token }}>{ children }</AuthContext.Provider>
 }
 
