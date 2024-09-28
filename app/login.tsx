@@ -5,6 +5,8 @@ import {useAuth} from "@/hooks/AuthProvider";
 import {useEmailValidation} from "@/hooks/useEmailValidation";
 import {usePasswordValidation} from "@/hooks/usePasswordValidation";
 import {router} from "expo-router";
+import {AxiosError} from "axios";
+import Toast from "react-native-toast-message";
 
 export default function loginPage() {
   const { login } = useAuth()
@@ -18,12 +20,26 @@ export default function loginPage() {
   const buttonDisabled: boolean = emailError || passwordError || passwordIsEmpty || emailIsEmpty
 
   const clickButton = async () => {
+    setShowLoader(true)
     try {
-      setShowLoader(true)
       await login(email, password)
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        if (err.status === 422) {
+          return Toast.show({
+            type: 'error',
+            text1: 'Ошибка',
+            text2: err.response?.data.message,
+          })
+        }
+      }
+      Toast.show({
+        type: 'error',
+        text1: 'Ошибка',
+        text2: 'Произошла ошибка на сервере!',
+      })
+    } finally {
       setShowLoader(false)
-    } catch (e) {
-      console.log(e)
     }
   }
 

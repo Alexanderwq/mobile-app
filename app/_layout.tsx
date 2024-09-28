@@ -10,6 +10,7 @@ import {
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import {Stack} from "expo-router";
 import {AuthProvider} from "@/hooks/AuthProvider";
+import Toast from "react-native-toast-message";
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient()
@@ -47,6 +48,7 @@ export default function RootLayout() {
             <Stack.Screen name="changePasswordModal" options={{ presentation: 'modal' }} />
             <Stack.Screen name="changeCityModal" options={{ presentation: 'modal' }} />
           </Stack>
+          <Toast />
         </AuthProvider>
       </QueryClientProvider>
     </PaperProvider>

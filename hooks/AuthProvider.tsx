@@ -4,6 +4,7 @@ import {useStorageState} from "@/hooks/useStorageState";
 import {router} from "expo-router";
 import { login as loginRequest, signUp as signUpRequest } from '@/api/auth'
 import {SignUpFormInterface} from "@/api/auth/types";
+import {Platform} from "react-native";
 
 const AuthContext = createContext<{
   login: (email: string, password: string) => void,
@@ -24,13 +25,13 @@ export function AuthProvider({ children }) {
   const [[isLoading, token], setToken] = useStorageState('token')
 
   async function login(email: string, password: string) {
-    const token = await loginRequest(email, password)
+    const token = await loginRequest(email, password, `${Platform.OS}/react-app`)
     setToken(token)
     router.push('/')
   }
 
   async function signUp(data: SignUpFormInterface) {
-    const token = await signUpRequest(data)
+    const token = await signUpRequest({...data, device_name: `${Platform.OS}/react-app`})
     setToken(token)
     router.push('/')
   }

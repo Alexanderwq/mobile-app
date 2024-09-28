@@ -9,6 +9,8 @@ import {useEmailValidation} from "@/hooks/useEmailValidation";
 import {usePasswordValidation} from "@/hooks/usePasswordValidation";
 import {router} from "expo-router";
 import CityInterface from "@/types/city/CityInterface";
+import {AxiosError} from "axios";
+import Toast from "react-native-toast-message";
 
 const citiesList: CityInterface[]  = [
   {
@@ -52,17 +54,27 @@ export default function signUpPage() {
     cityIsEmpty
 
   const clickButton = async () => {
+    setShowLoader(true)
     try {
-      setShowLoader(true)
       await signUp({
         email,
         name,
         password,
-        cityId: chosenCity as number,
       })
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        return Toast.show({
+          type: 'error',
+          text1: 'Ошибка',
+          text2: err.response?.data.message
+        })
+      }
+      Toast.show({
+        type: 'error',
+        text1: 'Произошла ошибка на сервере!',
+      })
+    } finally {
       setShowLoader(false)
-    } catch (e) {
-      console.log(e)
     }
   }
 
