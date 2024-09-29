@@ -25,13 +25,13 @@ export function AuthProvider({ children }) {
   const [[isLoading, token], setToken] = useStorageState('token')
 
   async function login(email: string, password: string) {
-    const token = await loginRequest(email, password, `${Platform.OS}/react-app`)
+    const token = (await loginRequest(email, password, `${Platform.OS}/react-app`)).data
     setToken(token)
     router.push('/')
   }
 
   async function signUp(data: SignUpFormInterface) {
-    const token = await signUpRequest({...data, device_name: `${Platform.OS}/react-app`})
+    const token = (await signUpRequest({...data, device_name: `${Platform.OS}/react-app`})).data
     setToken(token)
     router.push('/')
   }
