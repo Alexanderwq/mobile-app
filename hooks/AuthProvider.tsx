@@ -2,8 +2,8 @@ import {useContext, createContext, useState, useEffect} from "react";
 import UserInterface from "@/types/auth/UserInterface";
 import {useStorageState} from "@/hooks/useStorageState";
 import {router} from "expo-router";
-import { login as loginRequest, signUp as signUpRequest } from '@/api/auth'
-import {SignUpFormInterface} from "@/api/auth/types";
+import { login as loginRequest, signUp as signUpRequest, getUser as getUserRequest } from '@/api/auth'
+import {SignUpFormInterface, UserResponseInterface} from "@/api/auth/types";
 import {Platform} from "react-native";
 
 const AuthContext = createContext<{
@@ -41,14 +41,15 @@ export function AuthProvider({ children }) {
     setToken(null)
   }
 
-  function getUser() {
+  async function getUser() {
+    const user= (await getUserRequest()).data
+    const defaultCity = {
+      id: 1,
+      name: 'Ярославль'
+    }
     setUser({
-      name: 'sanya',
-      email: 'test@test.ru',
-      city: {
-        id: 1,
-        name: 'Ярославль'
-      },
+      ...user,
+      city: defaultCity,
     })
   }
 
