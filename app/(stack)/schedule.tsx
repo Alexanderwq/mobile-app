@@ -3,19 +3,14 @@ import DaysLine from "@/components/WeekLine/DaysLine";
 import {useState} from "react";
 import ScheduleCardList from "@/components/ScheduleCardList";
 
-const daysMock = [
-    { date: new Date('2024-08-09') },
-    { date: new Date('2024-08-12')},
-    { date: new Date('2024-08-19') },
-    { date: new Date('2024-08-13') },
-    { date: new Date('2024-08-14') },
-    { date: new Date('2024-08-15') },
-    { date: new Date('2024-08-17') },
-    { date: new Date('2024-08-20') },
-]
+const daysMock: Date[] = Array(14)
+  .fill(new Date())
+  .map((date: Date, index) =>
+    index === 0 ? new Date(date.setDate(date.getDate())) : new Date(date.setDate(date.getDate() + 1))
+  )
 
 export default function ScheduleScreen() {
-    const [selectedDay, setSelectedDay] = useState<Date>(new Date('2024-08-19'))
+    const [selectedDay, setSelectedDay] = useState<Date>(daysMock[0])
 
     return (
         <View style={styles.container}>

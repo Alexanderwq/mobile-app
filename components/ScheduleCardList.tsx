@@ -1,9 +1,10 @@
 import {useQuery} from "@tanstack/react-query";
 import {FlatList, SafeAreaView, StyleSheet, View} from "react-native";
+import {Text} from "react-native-paper";
 import ScheduleCard from "@/components/ScheduleCard";
 import {ActivityIndicator} from "react-native-paper";
-import api from '@/api/index'
 import ScheduleListItemInterface from "@/api/types/ScheduleListItemInterface";
+import {getScheduleList} from "@/api/schedule";
 
 type ScheduleCardListProps = {
     date: Date,
@@ -11,8 +12,8 @@ type ScheduleCardListProps = {
 
 export default function ScheduleCardList(props: ScheduleCardListProps) {
     const { isPending, error, data }: { isPending: boolean, error: boolean, data: ScheduleListItemInterface[] } = useQuery({
-        queryKey: ['scheduleList', props.date.getTime().toString()],
-        queryFn: () => api.getScheduleList(props.date.getTime().toString()),
+        queryKey: ['scheduleList', props.date.toString()],
+        queryFn: () => getScheduleList(props.date),
     })
 
     if (isPending) return (
@@ -23,6 +24,13 @@ export default function ScheduleCardList(props: ScheduleCardListProps) {
 
     return (
         <SafeAreaView style={styles.container}>
+          {!isPending && data.length === 0 && (
+            <View>
+              <Text variant='titleLarge' style={styles.notFoundText}>
+                Занятий нет.
+              </Text>
+            </View>
+          )}
             <FlatList
                 data={data}
                 renderItem={({item}) => (
@@ -41,5 +49,9 @@ const styles = StyleSheet.create({
     },
     loader: {
         marginTop: 100,
-    }
+    },
+    notFoundText: {
+      marginTop: 40,
+      textAlign: 'center',
+    },
 })
