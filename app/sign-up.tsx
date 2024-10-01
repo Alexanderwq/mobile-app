@@ -101,6 +101,7 @@ export default function signUpPage() {
             onPress={toggleCitySelect}
           >
             <TextInput
+              onPress={toggleCitySelect}
               mode="outlined"
               label={textLabelCity}
               editable={false}
@@ -167,6 +168,7 @@ const styles = StyleSheet.create({
   container: {
     flex: .5,
     justifyContent: 'center',
+    marginTop: 50,
   },
   form: {
     padding: 20,
