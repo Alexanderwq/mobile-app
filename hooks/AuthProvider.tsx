@@ -1,11 +1,11 @@
 import {useContext, createContext, useState, useEffect} from "react";
 import UserInterface from "@/types/auth/UserInterface";
 import {useStorageState} from "@/hooks/useStorageState";
-import {Redirect, router} from "expo-router";
+import {router} from "expo-router";
 import { login as loginRequest, signUp as signUpRequest, getUser as getUserRequest } from '@/api/auth'
-import {SignUpFormInterface, UserResponseInterface} from "@/api/auth/types";
+import {SignUpFormInterface} from "@/api/auth/types";
 import {Platform} from "react-native";
-import {AxiosError} from "axios";
+import Toast from "react-native-toast-message";
 
 const AuthContext = createContext<{
   login: (email: string, password: string) => void,
@@ -44,7 +44,7 @@ export function AuthProvider({ children }) {
 
   async function getUser() {
     try {
-      const user= (await getUserRequest()).data
+      const user = (await getUserRequest()).data
       const defaultCity = {
         id: 1,
         name: 'Ярославль'
@@ -59,6 +59,11 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
+    Toast.show({
+      type: 'error',
+      text1: 'Оши2бк',
+      text2: token ?? '',
+    })
     if (token) {
       getUser()
     }

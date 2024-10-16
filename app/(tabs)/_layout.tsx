@@ -3,7 +3,7 @@ import React from "react";
 import {useAuth} from "@/hooks/AuthProvider";
 
 export default function TabLayout() {
-  const { token } = useAuth()
+  const {token} = useAuth()
 
   if (!token) {
     return <Redirect href='/login'/>

@@ -4,12 +4,17 @@ import {useState} from "react";
 import {useAuth} from "@/hooks/AuthProvider";
 import {useEmailValidation} from "@/hooks/useEmailValidation";
 import {usePasswordValidation} from "@/hooks/usePasswordValidation";
-import {router} from "expo-router";
+import {Redirect, router} from "expo-router";
 import {AxiosError} from "axios";
 import Toast from "react-native-toast-message";
 
 export default function loginPage() {
-  const { login } = useAuth()
+  const { token, login } = useAuth()
+
+  if (token) {
+    return <Redirect href='/' />
+  }
+
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [showLoader, setShowLoader] = useState<boolean>(false)

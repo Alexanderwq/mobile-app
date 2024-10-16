@@ -1,15 +1,21 @@
 import axios, {AxiosInstance} from "axios";
 import {Platform} from "react-native";
+import * as SecureStore from "expo-secure-store";
 
 const api: AxiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:8000',
+  baseURL: 'http://sportadminpanel.ru',
   timeout: 1000,
   withCredentials: true,
   withXSRFToken: true,
 });
 
-api.interceptors.request.use(function (config) {
-  const token = Platform.OS === 'web' && typeof localStorage !== 'undefined' ? localStorage.getItem('token') : ''
+api.interceptors.request.use(async function (config) {
+  let token;
+  if (Platform.OS === 'web') {
+    token = localStorage.getItem('token')
+  } else {
+    token = await SecureStore.getItemAsync('token')
+  }
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
