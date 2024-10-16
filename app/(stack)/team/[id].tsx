@@ -1,17 +1,40 @@
 import { Image, StyleSheet, View} from "react-native";
-import {Text} from "react-native-paper";
+import {ActivityIndicator, Text} from "react-native-paper";
 import React from "react";
 import {Rating} from "react-native-ratings";
+import TrainerCardInterface from "@/types/TrainerCardInterface";
+import {useQuery} from "@tanstack/react-query";
+import {getTrainersList} from "@/api/team";
+import {useRoute} from "@react-navigation/core";
+import {useLocalSearchParams} from "expo-router";
 
 export default function TrainerPage() {
+  const { isPending, error, data }: { isPending: boolean, error: boolean, data: TrainerCardInterface[] } = useQuery({
+    queryKey: ['trainersList'],
+    queryFn: () => getTrainersList(),
+  })
+
+  const { id } = useLocalSearchParams()
+
+  const trainer = data.find(trainer => trainer.id === Number(id))
+
+  console.log(trainer)
+
+  const getSourceImg = (name) => {
+    return `http://sportadminpanel.ru/images/${name}`
+  }
+
+  if (isPending) return (
+    <ActivityIndicator animating={true} color="#01a5dd" size="large" />
+  )
+
   return (
     <View style={styles.container}>
-      <Text variant='titleLarge'>Воронцова Мария Дмитриевна</Text>
-      <Image style={styles.img} source={require('@/assets/images/trainer.webp')} />
+      <Text variant='titleLarge'>{trainer?.last_name} {trainer?.name}</Text>
+      <Text variant='titleLarge'>{trainer?.job_title}</Text>
+      <Image style={styles.img} source={{ uri: getSourceImg(trainer?.photo) }} />
       <Text variant='bodyLarge'>
-        Фитнес-тренер с 7-летним опытом работы в фитнес-центре. Имею 1-й взрослый разряд по плаванию.
-        Разработал комплекс упражнений для начинающих, позволяющий снизить вес в 2 раза быстрее традиционных методик.
-        Занимал 1 место в областных соревнованиях по кроссфиту в 2020 и 2021 годах.
+        {trainer?.description}
       </Text>
       <Rating
         style={styles.ratingLine}
@@ -37,6 +60,7 @@ const styles = StyleSheet.create({
     maxHeight: 250,
     alignSelf: 'center',
     marginTop: 20,
+    height: '100%',
     marginBottom: 20,
   },
   ratingLine: {
