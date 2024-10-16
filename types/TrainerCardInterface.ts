@@ -1,5 +1,6 @@
 export default interface TrainerCardInterface {
-    avatar: string,
+    id: number,
+    photo: string,
     name: string,
-    jobTitle: string,
+    job_title: string,
 }

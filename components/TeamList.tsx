@@ -1,45 +1,40 @@
 import {FlatList, Image, StyleSheet, TouchableOpacity, View} from "react-native";
-import {Divider, Text} from 'react-native-paper'
+import {ActivityIndicator, Divider, Text} from 'react-native-paper'
 import TrainerCardInterface from "@/types/TrainerCardInterface";
 import {router} from "expo-router";
+import {useQuery} from "@tanstack/react-query";
+import {getTrainersList} from "@/api/team";
 
 export default function TeamList() {
-  const teamList: TrainerCardInterface[] = [
-    {
-      jobTitle: 'Тренер по йоге',
-      name: 'Ольга',
-      avatar: 'trainer',
-    },
-    {
-      jobTitle: 'Тренер по йоге',
-      name: 'Ольга',
-      avatar: 'trainer',
-    },
-    {
-      jobTitle: 'Тренер по йоге',
-      name: 'Ольга',
-      avatar: 'trainer',
-    },
-  ]
-  const imageNames = {
-    trainer: require('@/assets/images/trainer.webp')
+  const { isPending, error, data }: { isPending: boolean, error: boolean, data: TrainerCardInterface[] } = useQuery({
+    queryKey: ['trainersList'],
+    queryFn: () => getTrainersList(),
+  })
+
+  const getSourceImg = (name) => {
+    return `http://sportadminpanel.ru/images/${name}`
   }
+
+  if (isPending) return (
+    <ActivityIndicator animating={true} color="#01a5dd" size="large" />
+  )
+
   const renderItem = ({item}: { item: TrainerCardInterface }) => (
-    <TouchableOpacity style={styles.card} onPress={() => router.push('/team/1')}>
+    <TouchableOpacity style={styles.card} onPress={() => router.push(`/team/${item.id}`)}>
       <Image
-        source={imageNames[item.avatar]}
+        source={{ uri: getSourceImg(item.photo) }}
         style={styles.avatar}
       />
       <View style={styles.cardInfo}>
         <Text variant="titleMedium">{item.name}</Text>
         <Divider/>
-        <Text>{item.jobTitle}</Text>
+        <Text>{item.job_title}</Text>
       </View>
     </TouchableOpacity>
   )
   return (
     <FlatList
-      data={teamList}
+      data={data}
       renderItem={renderItem}
       ItemSeparatorComponent={() => (
         <View style={{height: 15}}></View>

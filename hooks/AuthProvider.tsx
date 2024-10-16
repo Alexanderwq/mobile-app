@@ -59,11 +59,6 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    Toast.show({
-      type: 'error',
-      text1: 'Оши2бк',
-      text2: token ?? '',
-    })
     if (token) {
       getUser()
     }
