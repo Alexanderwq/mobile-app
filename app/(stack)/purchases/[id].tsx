@@ -3,21 +3,26 @@ import React, {useEffect} from "react";
 import {useLocalSearchParams, useNavigation} from "expo-router";
 import PurchasesCard from "@/components/PurchasesCard";
 
+type TrainerPageParams = {
+  name: string,
+  one_visit?: number,
+  month_visit?: number,
+}
+
 export default function TrainerPage() {
   const navigation = useNavigation()
-  const { id } = useLocalSearchParams()
+  const { name, one_visit, month_visit }: TrainerPageParams = useLocalSearchParams()
 
   useEffect(() => {
     navigation.setOptions({
-      title: 'Футбол'
+      title: name,
     })
   }, [navigation])
 
   return (
     <View style={styles.container}>
-      <PurchasesCard title={'Разовое посещение'} price={1500} />
-      <PurchasesCard title={'Абонемент на месяц в тренажерный зал'} price={1500} />
-      <PurchasesCard title={'Разовое посещение'} price={1500} />
+      {one_visit && <PurchasesCard title={'Разовое посещение'} price={one_visit} />}
+      {month_visit && <PurchasesCard title={'Абонемент на месяц в тренажерный зал'} price={month_visit} />}
     </View>
   )
 }
@@ -26,6 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     padding: 15,
+    gap: 10,
   },
   img: {
     borderRadius: 20,

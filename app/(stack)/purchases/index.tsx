@@ -1,31 +1,34 @@
 import {FlatList, StyleSheet, TouchableOpacity, View} from "react-native";
 import {Link} from "expo-router";
-
-const sportsList = [
-  {
-    id: 1,
-    name: 'Футбол'
-  },
-  {
-    id: 2,
-    name: 'Волейбол',
-  }
-]
+import {useQuery} from "@tanstack/react-query";
+import {getPurchasesList} from "@/api/purchases";
+import {ActivityIndicator} from "react-native-paper";
 
 type SportItem = {
   id: number,
   name: string,
+  one_visit: number,
+  month_visit: number,
 }
 
 export default function PurchasesPage() {
+  const { isPending, error, data }: { isPending: boolean, error: boolean, data: SportItem[] } = useQuery({
+    queryKey: ['purchasesList'],
+    queryFn: () => getPurchasesList(),
+  })
+
+  if (isPending) return (
+    <ActivityIndicator style={styles.loader} animating={true} color="#01a5dd" size="large" />
+  )
+
+  if (error) return 'Error!'
+
   const renderItem = (sport: SportItem) => (
     <TouchableOpacity style={styles.card}>
       <Link
         href={({
           pathname: '/purchases/[id]',
-          params: {
-            id: sport.id,
-          }
+          params: sport,
         })}>
         {sport.name}
       </Link>
@@ -34,7 +37,7 @@ export default function PurchasesPage() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={sportsList}
+        data={data}
         renderItem={(data) => renderItem(data.item)}
         ItemSeparatorComponent={() => (<View style={{marginTop: 10}}></View>)}
       />
@@ -56,5 +59,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 15,
     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'
+  },
+  loader: {
+    marginTop: 100,
   },
 })
