@@ -5,7 +5,6 @@ import {router} from "expo-router";
 import { login as loginRequest, signUp as signUpRequest, getUser as getUserRequest } from '@/api/auth'
 import {SignUpFormInterface} from "@/api/auth/types";
 import {Platform} from "react-native";
-import Toast from "react-native-toast-message";
 
 const AuthContext = createContext<{
   login: (email: string, password: string) => void,
