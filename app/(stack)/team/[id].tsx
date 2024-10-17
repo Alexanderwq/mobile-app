@@ -19,7 +19,7 @@ export default function TrainerPage() {
   const trainer = data.find(trainer => trainer.id === Number(id))
 
   const getSourceImg = (name) => {
-    return `http://sportadminpanel.ru/images/${name}`
+    return `https://sportadminpanel.ru/images/${name}`
   }
 
   if (isPending) return (
