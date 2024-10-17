@@ -2,7 +2,7 @@ import {FlatList, StyleSheet, TouchableOpacity, View} from "react-native";
 import {Button, Text} from 'react-native-paper'
 import {useState} from "react";
 import {router} from "expo-router";
-import { saveCity as saveCityRequest } from '@/api/changeCityModal/index'
+import { saveCity as saveCityRequest } from '@/api/changeCityModal'
 import {useAuth} from "@/hooks/AuthProvider";
 
 export default function ChangeCityModal() {

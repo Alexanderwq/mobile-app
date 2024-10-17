@@ -19,6 +19,10 @@ export default function PageLayout() {
           )}}>
           <Stack.Screen name="schedule" options={{ title: 'Расписание' }} />
           <Stack.Screen name="team/index" options={{ title: 'Наша команда' }} />
+          <Stack.Screen name="team/[id]" options={{ title: 'Тренер' }} />
+          <Stack.Screen name="purchases" options={{ title: 'Покупка' }} />
+          <Stack.Screen name="changePasswordModal" options={{ presentation: 'modal', title: 'Пароль' }} />
+          <Stack.Screen name="changeCityModal" options={{ presentation: 'modal', title: 'Город' }} />
         </Stack>
     )
 }

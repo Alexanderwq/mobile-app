@@ -18,8 +18,6 @@ export default function TrainerPage() {
 
   const trainer = data.find(trainer => trainer.id === Number(id))
 
-  console.log(trainer)
-
   const getSourceImg = (name) => {
     return `http://sportadminpanel.ru/images/${name}`
   }

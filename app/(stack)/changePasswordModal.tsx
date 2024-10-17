@@ -2,7 +2,7 @@ import {StyleSheet, View} from "react-native";
 import {Button, Text, TextInput} from 'react-native-paper'
 import {useState} from "react";
 import {usePasswordValidation} from "@/hooks/usePasswordValidation";
-import {changePassword as changePasswordRequest} from '@/api//changePasswordModal/index'
+import {changePassword as changePasswordRequest} from '@/api/changePasswordModal'
 import {useAuth} from "@/hooks/AuthProvider";
 import UserInterface from "@/types/auth/UserInterface";
 import {AxiosError} from "axios";

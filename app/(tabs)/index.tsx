@@ -16,7 +16,7 @@ export default function HomeScreen() {
     {
       title: 'Мы на карте',
       icon: 'map',
-      href: "/modal"
+      href: "https://yandex.ru/maps/"
     },
     {
       title: 'Наша команда',
