@@ -15,7 +15,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          headerTitle: 'Спорт',
+          headerTitle: 'Спортивный клуб "Сокол"',
           title: 'Меню',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
         }}
