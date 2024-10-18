@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet, TouchableOpacity, View} from "react-native";
+import {FlatList, StyleSheet, TouchableOpacity, View, Text} from "react-native";
 import {Link} from "expo-router";
 import {useQuery} from "@tanstack/react-query";
 import {getPurchasesList} from "@/api/purchases";
@@ -12,27 +12,33 @@ type SportItem = {
 }
 
 export default function PurchasesPage() {
-  const { isPending, error, data }: { isPending: boolean, error: boolean, data: SportItem[] } = useQuery({
+  const {isPending, error, data}: { isPending: boolean, error: boolean, data: SportItem[] } = useQuery({
     queryKey: ['purchasesList'],
     queryFn: () => getPurchasesList(),
   })
 
   if (isPending) return (
-    <ActivityIndicator style={styles.loader} animating={true} color="#01a5dd" size="large" />
+    <ActivityIndicator style={styles.loader} animating={true} color="#01a5dd" size="large"/>
   )
 
   if (error) return 'Error!'
 
   const renderItem = (sport: SportItem) => (
-    <TouchableOpacity style={styles.card}>
-      <Link
-        href={({
-          pathname: '/purchases/[id]',
-          params: sport,
-        })}>
-        {sport.name}
-      </Link>
-    </TouchableOpacity>
+    <Link
+      href={({
+        pathname: '/purchases/[id]',
+        params: sport,
+      })}
+      asChild
+      style={styles.link}
+    >
+      <TouchableOpacity style={styles.card}>
+        <Text>
+          {sport.name}
+        </Text>
+      </TouchableOpacity>
+    </Link>
+
   )
   return (
     <View style={styles.container}>
@@ -62,5 +68,8 @@ const styles = StyleSheet.create({
   },
   loader: {
     marginTop: 100,
+  },
+  link: {
+    width: '100%',
   },
 })
