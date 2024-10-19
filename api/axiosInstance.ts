@@ -3,7 +3,7 @@ import {Platform} from "react-native";
 import * as SecureStore from "expo-secure-store";
 
 const api: AxiosInstance = axios.create({
-  baseURL: 'https://sportadminpanel.ru',
+  baseURL: 'http://localhost:8000',
   timeout: 1000,
   withCredentials: true,
   withXSRFToken: true,

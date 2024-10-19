@@ -1,14 +1,19 @@
-import {FlatList, StyleSheet, TouchableOpacity, View, Text} from "react-native";
+import {FlatList, StyleSheet, TouchableOpacity, View} from "react-native";
 import {Link} from "expo-router";
 import {useQuery} from "@tanstack/react-query";
 import {getPurchasesList} from "@/api/purchases";
-import {ActivityIndicator} from "react-native-paper";
+import {ActivityIndicator, Text} from "react-native-paper";
 
 type SportItem = {
   id: number,
   name: string,
   one_visit: number,
   month_visit: number,
+  trainers: {
+    name: string,
+    last_name: string,
+  }[],
+  address?: string,
 }
 
 export default function PurchasesPage() {
@@ -33,9 +38,20 @@ export default function PurchasesPage() {
       style={styles.link}
     >
       <TouchableOpacity style={styles.card}>
-        <Text>
+        <Text variant='titleMedium'>
           {sport.name}
         </Text>
+
+        {sport.trainers.length !== 0 &&
+          (<Text>
+            Инструкторы:
+            {sport.trainers.map(trainer => `${trainer.name} ${trainer.last_name}`).join(', ')}
+          </Text>)}
+
+        {sport.address &&
+          (<Text>
+            Место: {sport.address}
+          </Text>)}
       </TouchableOpacity>
     </Link>
 
@@ -59,12 +75,12 @@ const styles = StyleSheet.create({
   },
   card: {
     padding: 15,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
     gap: 10,
     backgroundColor: '#fff',
     borderRadius: 15,
-    boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'
+    boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
   },
   loader: {
     marginTop: 100,
