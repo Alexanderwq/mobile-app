@@ -25,18 +25,18 @@ export default function ProfileScreen() {
               Смена пароля
             </Button>
           </View>
-          <View style={styles.card}>
-            <View style={styles.row}>
-              <Text variant='titleMedium'>Выбранный город:</Text>
-              <Text variant='titleMedium'>{user?.city.name}</Text>
-            </View>
-            <Button
-              style={styles.changeCityButton}
-              onPress={() => router.push('/changeCityModal')}
-            >
-              Изменить город
-            </Button>
-          </View>
+          {/*<View style={styles.card}>*/}
+          {/*  <View style={styles.row}>*/}
+          {/*    <Text variant='titleMedium'>Выбранный город:</Text>*/}
+          {/*    <Text variant='titleMedium'>{user?.city.name}</Text>*/}
+          {/*  </View>*/}
+          {/*  <Button*/}
+          {/*    style={styles.changeCityButton}*/}
+          {/*    onPress={() => router.push('/changeCityModal')}*/}
+          {/*  >*/}
+          {/*    Изменить город*/}
+          {/*  </Button>*/}
+          {/*</View>*/}
         </View>
     );
 }
