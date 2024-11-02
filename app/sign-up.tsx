@@ -32,10 +32,12 @@ export default function signUpPage() {
   const [email, setEmail] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [secondPassword, setSecondPassword] = useState<string>('')
   const [showCities, setShowCities] = useState<boolean>(false)
 
   const { emailError, emailIsEmpty } = useEmailValidation(email)
   const { passwordError, passwordIsEmpty } = usePasswordValidation(password)
+  const { secondPasswordError } = usePasswordValidation(secondPassword)
 
   const getCityNameById = (id: number|null) => {
     return citiesList.find((city) => city.id === id)?.name
@@ -51,9 +53,17 @@ export default function signUpPage() {
     passwordIsEmpty ||
     emailIsEmpty ||
     nameIsEmpty ||
-    cityIsEmpty
+    secondPasswordError
+    // || cityIsEmpty
 
   const clickButton = async () => {
+    if (secondPassword !== password) {
+      return Toast.show({
+        type: 'info',
+        text1: 'Пароли должны совпадать!',
+      })
+    }
+
     setShowLoader(true)
     try {
       await signUp({
@@ -96,33 +106,33 @@ export default function signUpPage() {
           <Text variant='titleLarge'>
             Зарегистрироваться
           </Text>
-          <TouchableOpacity
-            style={styles.citiesSelect}
-            onPress={toggleCitySelect}
-          >
-            <TextInput
-              onPress={toggleCitySelect}
-              mode="outlined"
-              label={textLabelCity}
-              editable={false}
-              right={<TextInput.Icon icon="chevron-down" size={20}/>}
-            />
-            {showCities && (
-              <View style={styles.citiesList}>
-                {
-                  citiesList.map((city: CityInterface) => (
-                    <Text
-                      style={styles.citiesListText}
-                      onPress={() => setCity(city.id)}
-                      key={city.id}
-                    >
-                      { city.name }
-                    </Text>
-                  ))
-                }
-              </View>
-            )}
-          </TouchableOpacity>
+          {/*<TouchableOpacity*/}
+          {/*  style={styles.citiesSelect}*/}
+          {/*  onPress={toggleCitySelect}*/}
+          {/*>*/}
+          {/*  <TextInput*/}
+          {/*    onPress={toggleCitySelect}*/}
+          {/*    mode="outlined"*/}
+          {/*    label={textLabelCity}*/}
+          {/*    editable={false}*/}
+          {/*    right={<TextInput.Icon icon="chevron-down" size={20}/>}*/}
+          {/*  />*/}
+          {/*  {showCities && (*/}
+          {/*    <View style={styles.citiesList}>*/}
+          {/*      {*/}
+          {/*        citiesList.map((city: CityInterface) => (*/}
+          {/*          <Text*/}
+          {/*            style={styles.citiesListText}*/}
+          {/*            onPress={() => setCity(city.id)}*/}
+          {/*            key={city.id}*/}
+          {/*          >*/}
+          {/*            { city.name }*/}
+          {/*          </Text>*/}
+          {/*        ))*/}
+          {/*      }*/}
+          {/*    </View>*/}
+          {/*  )}*/}
+          {/*</TouchableOpacity>*/}
 
           <TextInput
             mode="outlined"
@@ -140,9 +150,18 @@ export default function signUpPage() {
           <TextInput
             mode="outlined"
             label="Пароль"
+            secureTextEntry={true}
             value={password}
             error={passwordError}
             onChangeText={text => setPassword(text)}
+          />
+          <TextInput
+            mode="outlined"
+            label="Подтвердите пароль"
+            secureTextEntry={true}
+            value={secondPassword}
+            error={secondPasswordError}
+            onChangeText={text => setSecondPassword(text)}
           />
           <Button
             style={styles.button}
