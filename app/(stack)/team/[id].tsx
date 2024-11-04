@@ -1,11 +1,9 @@
-import { Image, StyleSheet, View} from "react-native";
+import {Image, SafeAreaView, ScrollView, StyleSheet, View} from "react-native";
 import {ActivityIndicator, Text} from "react-native-paper";
 import React from "react";
-import {Rating} from "react-native-ratings";
 import TrainerCardInterface from "@/types/TrainerCardInterface";
 import {useQuery} from "@tanstack/react-query";
 import {getTrainersList} from "@/api/team";
-import {useRoute} from "@react-navigation/core";
 import {useLocalSearchParams} from "expo-router";
 
 export default function TrainerPage() {
@@ -27,23 +25,14 @@ export default function TrainerPage() {
   )
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text variant='titleLarge'>{trainer?.last_name} {trainer?.name}</Text>
       <Text variant='titleLarge'>{trainer?.job_title}</Text>
       <Image style={styles.img} source={{ uri: getSourceImg(trainer?.photo) }} />
       <Text variant='bodyLarge'>
         {trainer?.description}
       </Text>
-      <Rating
-        style={styles.ratingLine}
-        isDisabled
-        readonly
-        startingValue={4.5}
-      />
-      <Text style={styles.rateText} variant='bodyLarge'>
-        Оценка 4.5
-      </Text>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -51,6 +40,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     padding: 15,
+    flex: 1,
   },
   img: {
     borderRadius: 20,
@@ -58,14 +48,7 @@ const styles = StyleSheet.create({
     maxHeight: 250,
     alignSelf: 'center',
     marginTop: 20,
-    height: '100%',
+    height: 300,
     marginBottom: 20,
-  },
-  ratingLine: {
-    marginTop: 15,
-    marginBottom: 5,
-  },
-  rateText: {
-    alignSelf: 'center',
   },
 })

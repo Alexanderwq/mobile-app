@@ -44,19 +44,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 15,
     position: 'relative',
-    gap: 30,
+    gap: 20,
   },
   timeBlock: {
     justifyContent: 'center',
   },
   line: {
-    width: 50,
-    height: 2,
+    width: 2,
+    height: '100%',
     backgroundColor: 'gray',
-    transform: 'rotate(90deg)',
-    position: 'absolute',
-    top: '100%',
-    left: 40,
     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'
   },
   sportName: {
