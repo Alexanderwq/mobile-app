@@ -4,5 +4,6 @@ export interface PaymentsListInterface {
     visit: string,
     name: string,
     created_at: string,
+    endDate: string,
   }[],
 }
