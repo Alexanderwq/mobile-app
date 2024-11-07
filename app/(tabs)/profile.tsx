@@ -2,6 +2,7 @@ import {View, StyleSheet} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {useAuth} from "@/hooks/AuthProvider";
 import {router} from "expo-router";
+import ProfilePaymentBlock from '@/components/ProfilePaymentBlock'
 
 export default function ProfileScreen() {
     const { user } = useAuth()
@@ -25,6 +26,7 @@ export default function ProfileScreen() {
               Смена пароля
             </Button>
           </View>
+          <ProfilePaymentBlock />
           {/*<View style={styles.card}>*/}
           {/*  <View style={styles.row}>*/}
           {/*    <Text variant='titleMedium'>Выбранный город:</Text>*/}
