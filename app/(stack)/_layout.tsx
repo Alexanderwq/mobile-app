@@ -22,6 +22,7 @@ export default function PageLayout() {
           <Stack.Screen name="team/[id]" options={{ title: 'Тренер' }} />
           <Stack.Screen name="purchases/index" options={{ title: 'Выберите направление' }} />
           <Stack.Screen name="changePasswordModal" options={{ presentation: 'modal', title: 'Пароль' }} />
+          <Stack.Screen name="removeAccountModal" options={{ presentation: 'modal', title: 'Удаление аккаунта' }} />
           <Stack.Screen name="changeCityModal" options={{ presentation: 'modal', title: 'Город' }} />
         </Stack>
     )

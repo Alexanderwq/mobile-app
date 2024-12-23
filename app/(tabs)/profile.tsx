@@ -2,24 +2,10 @@ import {View, StyleSheet} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {useAuth} from "@/hooks/AuthProvider";
 import {router} from "expo-router";
-import {removeUser} from "@/api/auth";
-import Toast from "react-native-toast-message";
 import ProfilePaymentBlock from '@/components/ProfilePaymentBlock'
 
 export default function ProfileScreen() {
-    const { user, logOut } = useAuth()
-
-    const removeAccount = async () => {
-        try {
-            await removeUser()
-            logOut()
-        } catch (e) {
-            Toast.show({
-                type: 'error',
-                text1: 'Произошла ошибка на сервере!',
-            })
-        }
-    }
+    const { user } = useAuth()
 
     return (
         <View style={styles.container}>
@@ -56,7 +42,7 @@ export default function ProfileScreen() {
           <Button
               mode="contained"
               style={styles.deleteButton}
-              onPress={removeAccount}
+              onPress={() => router.push('/removeAccountModal')}
           >
             Удалить учетную запись
           </Button>
