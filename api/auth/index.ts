@@ -17,3 +17,7 @@ export function signUp(data: SignUpFormInterface & { device_name }): AxiosPromis
 export function getUser(): AxiosPromise<UserResponseInterface> {
   return api.get('/api/user')
 }
+
+export function removeUser(): AxiosPromise<void> {
+  return api.delete('/api/user')
+}

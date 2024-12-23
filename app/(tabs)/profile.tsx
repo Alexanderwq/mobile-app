@@ -2,10 +2,24 @@ import {View, StyleSheet} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {useAuth} from "@/hooks/AuthProvider";
 import {router} from "expo-router";
+import {removeUser} from "@/api/auth";
+import Toast from "react-native-toast-message";
 import ProfilePaymentBlock from '@/components/ProfilePaymentBlock'
 
 export default function ProfileScreen() {
-    const { user } = useAuth()
+    const { user, logOut } = useAuth()
+
+    const removeAccount = async () => {
+        try {
+            await removeUser()
+            logOut()
+        } catch (e) {
+            Toast.show({
+                type: 'error',
+                text1: 'Произошла ошибка на сервере!',
+            })
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -39,6 +53,13 @@ export default function ProfileScreen() {
           {/*    Изменить город*/}
           {/*  </Button>*/}
           {/*</View>*/}
+          <Button
+              mode="contained"
+              style={styles.deleteButton}
+              onPress={removeAccount}
+          >
+            Удалить учетную запись
+          </Button>
         </View>
     );
 }
@@ -67,4 +88,8 @@ const styles = StyleSheet.create({
   changeCityButton: {
     alignSelf: 'flex-start',
   },
+  deleteButton: {
+    alignSelf: 'flex-start',
+    marginTop: 10,
+  }
 })
