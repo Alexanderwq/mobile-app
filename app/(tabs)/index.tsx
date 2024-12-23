@@ -8,11 +8,11 @@ export default function HomeScreen() {
       icon: 'calendar',
       href: "/schedule"
     },
-    {
-      title: 'Приобрести абонемент',
-      icon: 'wallet',
-      href: "/purchases"
-    },
+    // {
+    //   title: 'Приобрести абонемент',
+    //   icon: 'wallet',
+    //   href: "/purchases"
+    // },
     {
       title: 'Мы на карте',
       icon: 'map',
