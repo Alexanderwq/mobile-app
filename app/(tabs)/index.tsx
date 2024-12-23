@@ -16,7 +16,7 @@ export default function HomeScreen() {
     {
       title: 'Мы на карте',
       icon: 'map',
-      href: "https://yandex.ru/maps/"
+      href: "https://yandex.ru/maps/16/yaroslavl/house/dyadkovskaya_ulitsa_7/Z0AYfwdgTUcCQFttfXl5cnhiYg==/?ll=39.900414%2C57.583421&z=17"
     },
     {
       title: 'Наша команда',
