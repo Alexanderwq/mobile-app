@@ -11,7 +11,7 @@ export default function MainMenu() {
   })
 
   if (isPending) return (
-    <ActivityIndicator animating={true} color="#01a5dd" size="large"/>
+      ''
   )
 
   if (error) return (
