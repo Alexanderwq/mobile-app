@@ -6,4 +6,8 @@ export interface PaymentsListInterface {
     created_at: string,
     endDate: string,
   }[],
+  oneVisits: {
+    id: number,
+    trainingName: string,
+  }[],
 }

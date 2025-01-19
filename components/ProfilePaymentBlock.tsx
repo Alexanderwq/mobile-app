@@ -20,6 +20,11 @@ export default function MainMenu() {
 
   return (
     <View style={styles.container}>
+      {data.oneVisits.map((oneVisit) => (
+        <View style={styles.card} key={oneVisit.id}>
+          Оплачена тренировка по { oneVisit.trainingName }
+        </View>
+      ))}
       {data.monthSubscriptions.map(monthSubscription => (
         <View style={styles.card} key={monthSubscription.id}>
           <Text>
