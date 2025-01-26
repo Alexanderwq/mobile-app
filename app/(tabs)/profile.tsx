@@ -1,52 +1,82 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, RefreshControl, ScrollView} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {useAuth} from "@/hooks/AuthProvider";
 import {router} from "expo-router";
 import ProfilePaymentBlock from '@/components/ProfilePaymentBlock'
+import React from "react";
+import {PaymentsListInterface} from "@/api/profile/types";
+import {useQuery} from "@tanstack/react-query";
+import {getPaymentsList} from "@/api/profile";
 
 export default function ProfileScreen() {
     const { user } = useAuth()
+    const {isPending, error, data, refetch}:
+        { isPending: boolean,
+          error: boolean,
+          data: PaymentsListInterface,
+          refetch: () => {},
+        } = useQuery({
+      queryKey: ['paymentsList'],
+      queryFn: () => getPaymentsList(),
+    })
+
 
     return (
-        <View style={styles.container}>
-          <View style={styles.card}>
-            <Text variant='titleMedium' style={styles.title}>Личная информация</Text>
-            <View style={styles.row}>
-              <Text variant='titleMedium'>Эл. почта:</Text>
-              <Text variant='titleMedium'>{user?.email}</Text>
+        <ScrollView
+            contentContainerStyle={{flexGrow: 1}}
+            refreshControl={
+              <RefreshControl
+                  refreshing={false}
+                  onRefresh={() => {
+                    refetch()
+                  }}
+              />
+            }
+        >
+          <View style={styles.container}>
+            <View style={styles.card}>
+              <Text variant='titleMedium' style={styles.title}>Личная информация</Text>
+              <View style={styles.row}>
+                <Text variant='titleMedium'>Эл. почта:</Text>
+                <Text variant='titleMedium'>{user?.email}</Text>
+              </View>
+              <View style={styles.row}>
+                <Text variant='titleMedium'>Имя:</Text>
+                <Text variant='titleMedium'>{user?.name}</Text>
+              </View>
+              <Button
+                style={styles.changeCityButton}
+                onPress={() => router.push('/changePasswordModal')}
+              >
+                Смена пароля
+              </Button>
             </View>
-            <View style={styles.row}>
-              <Text variant='titleMedium'>Имя:</Text>
-              <Text variant='titleMedium'>{user?.name}</Text>
-            </View>
+            <ProfilePaymentBlock
+              isPending={isPending}
+              error={error}
+              data={data}
+            />
+            {/*<View style={styles.card}>*/}
+            {/*  <View style={styles.row}>*/}
+            {/*    <Text variant='titleMedium'>Выбранный город:</Text>*/}
+            {/*    <Text variant='titleMedium'>{user?.city.name}</Text>*/}
+            {/*  </View>*/}
+            {/*  <Button*/}
+            {/*    style={styles.changeCityButton}*/}
+            {/*    onPress={() => router.push('/changeCityModal')}*/}
+            {/*  >*/}
+            {/*    Изменить город*/}
+            {/*  </Button>*/}
+            {/*</View>*/}
             <Button
-              style={styles.changeCityButton}
-              onPress={() => router.push('/changePasswordModal')}
+                mode="contained"
+                style={styles.deleteButton}
+                onPress={() => router.push('/removeAccountModal')}
             >
-              Смена пароля
+              Удалить учетную запись
             </Button>
           </View>
-          <ProfilePaymentBlock />
-          {/*<View style={styles.card}>*/}
-          {/*  <View style={styles.row}>*/}
-          {/*    <Text variant='titleMedium'>Выбранный город:</Text>*/}
-          {/*    <Text variant='titleMedium'>{user?.city.name}</Text>*/}
-          {/*  </View>*/}
-          {/*  <Button*/}
-          {/*    style={styles.changeCityButton}*/}
-          {/*    onPress={() => router.push('/changeCityModal')}*/}
-          {/*  >*/}
-          {/*    Изменить город*/}
-          {/*  </Button>*/}
-          {/*</View>*/}
-          <Button
-              mode="contained"
-              style={styles.deleteButton}
-              onPress={() => router.push('/removeAccountModal')}
-          >
-            Удалить учетную запись
-          </Button>
-        </View>
+        </ScrollView>
     );
 }
 

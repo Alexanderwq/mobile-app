@@ -1,31 +1,32 @@
 import {StyleSheet, View} from "react-native";
 import {Text} from "react-native-paper";
-import {useQuery} from "@tanstack/react-query";
-import {getPaymentsList} from "@/api/profile";
 import {PaymentsListInterface} from "@/api/profile/types";
 
-export default function MainMenu() {
-  const {isPending, error, data}: { isPending: boolean, error: boolean, data: PaymentsListInterface } = useQuery({
-    queryKey: ['paymentsList'],
-    queryFn: () => getPaymentsList(),
-  })
+type PaymentBlockProps = {
+  isPending: boolean,
+  error: boolean,
+  data: PaymentsListInterface,
+}
 
-  if (isPending) return (
+export default function MainMenu(props: PaymentBlockProps) {
+  if (props.isPending) return (
       ''
   )
 
-  if (error) return (
+  if (props.error) return (
     <Text>Произошла ошибка при получении ваших оплат.</Text>
   )
 
   return (
     <View style={styles.container}>
-      {data.oneVisits.map((oneVisit) => (
+      {props.data.oneVisits.map((oneVisit) => (
         <View style={styles.card} key={oneVisit.id}>
-          Оплачена тренировка по { oneVisit.trainingName }
+          <Text>
+            Оплачена тренировка по { oneVisit.trainingName }
+          </Text>
         </View>
       ))}
-      {data.monthSubscriptions.map(monthSubscription => (
+      {props.data.monthSubscriptions.map(monthSubscription => (
         <View style={styles.card} key={monthSubscription.id}>
           <Text>
             Абонемент
