@@ -4,7 +4,7 @@ import * as SecureStore from "expo-secure-store";
 
 const api: AxiosInstance = axios.create({
   baseURL: 'https://sportadminpanel.ru',
-  timeout: 1000,
+  timeout: 5000,
   withCredentials: true,
   withXSRFToken: true,
 });

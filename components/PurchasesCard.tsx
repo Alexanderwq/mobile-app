@@ -4,6 +4,8 @@ import {Button, Text} from 'react-native-paper'
 type PurchasesCardProps = {
   title: string,
   price: number,
+  loading: boolean,
+  pressBuy: () => {},
 }
 
 export default function PurchasesCard(props: PurchasesCardProps) {
@@ -13,7 +15,12 @@ export default function PurchasesCard(props: PurchasesCardProps) {
         <Text variant='bodyLarge'>{ props.title }</Text>
         <Text>Цена: { new Intl.NumberFormat('ru').format(props.price) } руб.</Text>
       </View>
-      <Button style={styles.button} mode='contained'>
+      <Button
+          style={styles.button}
+          disabled={props.loading}
+          onPress={props.pressBuy}
+          mode='contained'
+      >
         Купить
       </Button>
     </View>

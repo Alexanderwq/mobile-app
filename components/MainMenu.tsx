@@ -37,13 +37,14 @@ const styles = StyleSheet.create({
   },
   item: {
     paddingTop: 0,
-    paddingBottom: 7,
+    paddingBottom: 10,
     marginTop: 15,
     width: '100%',
     ...Platform.select({
       ios: {
         borderBottomColor: 'rgba(1,165,223,1.00)',
         borderBottomWidth: 1,
+        height: 43,
       },
     })
   },

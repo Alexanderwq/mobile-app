@@ -1,5 +1,5 @@
 import {StyleSheet, View} from "react-native";
-import {ActivityIndicator, Text} from "react-native-paper";
+import {Text} from "react-native-paper";
 import {useQuery} from "@tanstack/react-query";
 import {getPaymentsList} from "@/api/profile";
 import {PaymentsListInterface} from "@/api/profile/types";
