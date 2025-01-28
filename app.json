@@ -7,10 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
       "icon": "./assets/images/icon.png",
       "supportsTablet": true,
@@ -25,6 +21,13 @@
       "gradleCommand": ":app:assembleRelease",
       "package": "com.alexanderwq.mobileapp"
     },
+    "build": {
+      "preview": {
+        "android": {
+          "buildType": "apk"
+        }
+      }
+    },
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -33,7 +36,15 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
-      "expo-font"
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+      }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
